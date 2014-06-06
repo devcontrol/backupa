@@ -34,7 +34,7 @@ then
 		echo 'Command 2 was successful'
 		echo "STARTING MAIL BACKUP"
 
-		COMMAND='tar cfvz '$BASEURL'shisha_'$HOUR'_'$MINUTE'_.data.tar.gz '$MAILURL
+		COMMAND='tar cfvz '$PIMPURL'shisha_'$HOUR'_'$MINUTE'_.data.tar.gz '$MAILURL
 		$COMMAND 2>/dev/null
 
 		if [ $? -eq 0 ]
@@ -49,7 +49,7 @@ then
 
 		echo "STARTING CLOUD BACKUP"
 
-		COMMAND='tar cfvz '$BASEURL'cloud_'$HOUR'_'$MINUTE'_.data.tar.gz '$CLOUDURL
+		COMMAND='tar cfvz '$PIMPURL'cloud_'$HOUR'_'$MINUTE'_.data.tar.gz ' $$CLOUDURL
 		$COMMAND 2>/dev/null
 
 		if [ $? -eq 0 ]
