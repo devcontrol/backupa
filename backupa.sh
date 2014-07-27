@@ -4,6 +4,7 @@
 BASEURL="/mnt/alias/backup"
 MAILURL="/mnt/alias/storage/shishaMail"
 CLOUDURL="/mnt/alias/storage/owncloud"
+MYDUMPURL="/mnt/alias/backup/mydump"
 
 DAY=`eval date +"%d"`
 MONTH=`eval date +"%m"`
@@ -36,7 +37,7 @@ then
 
 		if [ $? -eq 0 ]
 		then
-				echo 'MAIL BACKUP SUCCESSFUL'L
+				echo 'MAIL BACKUP SUCCESSFULL'
 		else
 				echo "FAILURE!!"
 		fi
@@ -51,7 +52,22 @@ then
 
 		if [ $? -eq 0 ]
 		then
-				echo 'CLOUD BACKUP SUCCESSFUL'L
+				echo 'CLOUD BACKUP SUCCESSFULL'
+		else
+				echo "FAILURE!!"
+		fi
+		
+		HOUR=`eval date +"%H"`
+		MINUTE=`eval date +"%M"`
+
+		echo "STARTING CLOUD BACKUP"
+
+		COMMAND="tar cfvz ${PIMPURL}mydump_${HOUR}_${MINUTE}_.data.tar.gz ${MYDUMPURL}"
+		$COMMAND 2>/dev/null
+
+		if [ $? -eq 0 ]
+		then
+				echo 'MYSQL BACKUP SUCCESSFULL'
 		else
 				echo "FAILURE!!"
 		fi
