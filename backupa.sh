@@ -5,7 +5,7 @@ BASEURL="/mnt/alias/backup"
 MAILURL="/mnt/alias/storage/shishaMail"
 CLOUDURL="/mnt/alias/storage/owncloud"
 MYDUMPURL="/mnt/alias/backup/mydump"
-
+GITLABURL="/mnt/alias/backup/gitlab"
 DAY=`eval date +"%d"`
 MONTH=`eval date +"%m"`
 YEAR=`eval date +"%Y"`
@@ -71,6 +71,21 @@ then
 		else
 				echo "FAILURE!!"
 		fi
+		HOUR=`eval date +"%H"`
+		MINUTE=`eval date +"%M"`
+
+		echo "STARTING GITLAB BACKUP"
+
+		COMMAND="tar cfvz ${PIMPURL}gitlab_${HOUR}_${MINUTE}_.data.tar.gz ${GITLABURL}"
+		$COMMAND 2>/dev/null
+
+		if [ $? -eq 0 ]
+		then
+				echo 'MYSQL GITLAB SUCCESSFULL'
+		else
+				echo "FAILURE!!"
+		fi
+		
 
 else
 		echo 'Nope! Must be some kind of strage Err0r!!'
