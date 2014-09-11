@@ -6,6 +6,7 @@ MAILURL="/mnt/alias/storage/shishaMail"
 CLOUDURL="/mnt/alias/storage/owncloud"
 MYDUMPURL="/mnt/alias/backup/mydump"
 GITLABURL="/mnt/alias/backup/gitlab"
+NODEBBURL="/mnt/alias/backup/nodebb"
 DAY=`eval date +"%d"`
 MONTH=`eval date +"%m"`
 YEAR=`eval date +"%Y"`
@@ -82,6 +83,21 @@ then
 		if [ $? -eq 0 ]
 		then
 				echo 'MYSQL GITLAB SUCCESSFULL'
+		else
+				echo "FAILURE!!"
+		fi
+		
+		HOUR=`eval date +"%H"`
+		MINUTE=`eval date +"%M"`
+
+		echo "STARTING NODEBB BACKUP"
+
+		COMMAND="tar cfvz ${PIMPURL}nodebb_${HOUR}_${MINUTE}_.data.tar.gz ${NODEBBURL}"
+		$COMMAND 2>/dev/null
+
+		if [ $? -eq 0 ]
+		then
+				echo 'NODEBB BACKUP SUCCESSFULL'
 		else
 				echo "FAILURE!!"
 		fi
